@@ -1,0 +1,31 @@
+---
+title: "Plot of the results obtained, highlighting those residues that are more relevant for the stability of the interface"
+author: "Júlia Prenafeta Mora"
+date: "2023-11-22"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r cars}
+# Importing library with which we'll plot the results
+library(ggplot2)
+# Reading results of dG difference when substituting residues with Alanine
+res_ala <- read.csv("/home/juliapm/biofi/res_ala.txt", header=FALSE)
+
+# Create variable 'nums' with absolute value of dG difference
+# In order to find which residues have the most impact on the structure, that is, if they stabilize or destabilize, we have made absolute value to see the impact regardless of whether it is good or bad, since the objective is to see who is more essential
+nums = abs(res_ala[2])
+
+# Create data frame with residue ID and dG difference
+df <- rbind(data.frame(x= res_ala[1],y= nums,d="d1"))
+#why the variable d (d1, d2)??
+```
+
+```{r}
+# With library ggplot create plot to search for those residues that have more impact on structure
+ggplot(df, aes(V1,V2, group=d)) +
+  labs(x = "Residues", y = "Difference on binding energy with mutation", title = "Effect of residue substitution on AG") + geom_line(aes(colour=d))
+```
