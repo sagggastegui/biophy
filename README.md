@@ -230,10 +230,13 @@ We encountered a problem once our programs were done; our results didn’t make 
 
 ![Screenshot from 2023-11-22 11-47-57](https://github.com/sagggastegui/biophy/assets/144942444/9295ca31-a6ca-4c9c-b15e-9c6cf766cf64)
 
+We also had minor problems when downloading biobb and naccess which were easily solved for biobb and required a bit more for naccess. We followed Josep-Lluis Gelpi’s github instructions and resolved the problem.
+
 **Conclusions**
 
 Once we got all the results by following the steps, we obtained some conclusions.
 To sum up, we have been able to determine how changes in the building blocks of a protein affect its stability, by using ΔG values to show it. 
+Using mathematical formulas applied to general concepts, we were able  to explain really detailed things at the molecular level.
 
 We now focus on STEP 3. The obtained results show us the different ΔG of the change in the residue in the first column for an Alanine atom.  If we take as an example THR A27 (located in the second row of the first column), by changing it to an Ala atom we obtained a ΔG of 3.783. Alanine is a hydrophobic amino acid, and this property will help us to conclude some of the results.
 
