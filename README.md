@@ -57,6 +57,7 @@ The structure before cleaning the protein, many Heteroatoms, many water molecule
 
 After doing the quality check, all heteroatoms were removed, no more water molecules and almost 100 residues were removed in total. Hydrogens were added. 
 
+![1](https://github.com/sagggastegui/biophy/assets/144942444/35a060f5-6730-45e2-ab3a-3c5df9e795c4) ![2](https://github.com/sagggastegui/biophy/assets/144942444/357816b9-aead-46d9-ac5b-6d126fa8b0c9)
 
 
 ## Step 1
@@ -210,6 +211,7 @@ TYR E505, -1.336
 
 Here you can observe the plot of the results obtained:
 
+![Screenshot from 2023-11-20 12-47-37](https://github.com/sagggastegui/biophy/assets/144942444/671aa485-76ca-4d85-b4dc-071a7102f1c1)
 
 
 ## Step 4
