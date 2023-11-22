@@ -57,7 +57,7 @@ The structure before cleaning the protein, many Heteroatoms, many water molecule
 
 After doing the quality check, all heteroatoms were removed, no more water molecules and almost 100 residues were removed in total. Hydrogens were added. 
 
-(foto)
+
 
 ## Step 1
 The aim of this first step was the visualization of the 2 structures, its differentiation and also, the selection of the atoms involved in the interface and finding polar bonds. 
@@ -66,56 +66,36 @@ We used Pymol for all of the requirements mentioned above.
 We actually found 2 ways of finding the same interactions between chains:
 1st way: by directly finding interactions between chains.
 
+![find-polar-cont-between-chains](https://github.com/sagggastegui/biophy/assets/144942444/28d8fc05-bcba-4c08-bfa9-dc7499e7e787)
+
 Then, showing its distance
 
-
-
-
-
-
-
-
-
-
-
+![show-labels-quik-method](https://github.com/sagggastegui/biophy/assets/144942444/a4565721-c949-4717-bac1-7519cdab4008)
 
 2nd way: by selecting first the possible areas with interactions between chains
+
+![Screenshot from 2023-11-22 11-33-03](https://github.com/sagggastegui/biophy/assets/144942444/dbce4647-3bc0-443b-b8ac-e0703d4cb911)
 
 
 Then, finding the polar contacts to any atoms.
 
-
+![Screenshot from 2023-11-22 11-33-16](https://github.com/sagggastegui/biophy/assets/144942444/62fbab3c-3f58-43ee-948b-2cc405ab3633)
 
 After that, we showed both chains as lines so we can select the residues of the interactions we found easier, but only the ones between chains. Yellow lines shown are the interactions.
 
-
-
-
-
-
-
-
-
+![Screenshot from 2023-11-22 11-33-31](https://github.com/sagggastegui/biophy/assets/144942444/e55bec8e-ed24-40ac-91df-b9eb47333553)
 
 Then, we only showed as sticks the residues we have selected. Now, we are ready to use the wizard tool.
 
+![Screenshot from 2023-11-22 11-33-35](https://github.com/sagggastegui/biophy/assets/144942444/f972e14d-6c7b-417e-a569-26dedd205214)
 
 In order to use wizard, we have to click on the upper toolbar and then find ‘Measurements’. Then, we selected the atoms from each interaction to measure its distance.
 
-
+![Screenshot from 2023-11-22 11-33-39](https://github.com/sagggastegui/biophy/assets/144942444/3956e166-ce3e-477c-91f9-7f4450256f40)
 
 Result obtained:
 
-
-
-
-
-
-
-
-
-
-
+![Screenshot from 2023-11-22 11-33-46](https://github.com/sagggastegui/biophy/assets/144942444/f8f6b193-31d1-4afc-b9ad-2e06157bfcfb)
 
 We obtained, and therefore, concluded that the largest distance is 2.6 Å (between LYS 31 and GLN 493), and so as to ensure that the adjacent residues are also considered, we added 1.4 Å, giving us the result of 4 Å as the largest distance.
 We also prepare a python script (step1-interface-res.ipynb) to look for the residues that have contact between chains. This are the ones we obtained:
@@ -138,14 +118,32 @@ We also considered solvation energies from the ASA values for all atom types (no
 
 As a formula to compute the binding energy we used the difference of electrostatic, Van der Waals and solvation energy between chains, minus the solvation energy individually of each of them. 
 
-
+![Screenshot from 2023-11-22 11-40-22](https://github.com/sagggastegui/biophy/assets/144942444/02bdd449-75c6-4ed4-a6c3-39b884fff6ac)
 
 By using Biopython, we went through the protein structure so as to gather chains and residues IDs. With the help of the variable called MAXDIST, which we set to 4 Å (as we previously mentioned), we computed various values by calling specific functions. Afterwards, the formula ensured us to use these values so as to find the total energy.
 We performed this experiment with all the residues, and the interface ones,  too. 
 These two situationships were different with the help of the variable MAXDIST, as in the all residues situation, it was set to zero. This guaranteed us that the formula computed the energy for ALL residues in the protein.
 
 Final ΔG=-172.639878968562 for residues and ΔG=-127.88949147947226 for residues 
-For all residues:				For the interface residues:
+
+For all residues:				
+```
+Total Electrostatic:  -4.798053581712642
+Total Vdw:  -172.67239238684928
+Total Solvation Complex:  -517.432398000001
+Total Solv  A -419.18839600000035
+Total Solv  E -103.07456899999997
+DG AB-A-B -172.639878968562
+```
+For the interface residues:
+```
+Total Electrostatic:  4.335211181738842
+Total Vdw:  -136.2064906612111
+Total Solvation Complex:  -4.910622999999999
+Total Solv  A -25.623500999999997
+Total Solv  E 16.731090000000005
+DG AB-A-B -127.88949147947226
+```
 ## Step 3
 Within the following step, we needed to determine the effect of replacing each interface residue by Ala in the overall ΔGA-B , and plot the results, highlighting the most relevant residues for the stability of the interface. We computed it by using the code of below:
 
@@ -170,23 +168,45 @@ Previously to running the previous code, we had to determine a variable with the
 ala_atoms = {'N', 'H', 'CA', 'HA', 'C', 'O', 'CB', 'HB', 'HB1', 'HB2', 'HB3', 'HA1', 'HA2', 'HA3'}
 ```
 We obtained the following results:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+```
+GLN A24, 3.334
+THR A27, 3.783
+PHE A28, -0.7887
+ASP A30, 6.292
+LYS A31, 8.02
+HIE A34, 5.351
+GLU A35, 4.779
+GLU A37, 4.999
+ASP A38, 4.695
+TYR A41, 3.858
+GLN A42, 9.785
+LEU A79, -0.5531
+MET A82, -1.882
+TYR A83, 3.01
+ASN A330, 5.656
+LYS A353, 7.583
+GLY A354, 0.0
+ASP A355, 2.562
+ARG A357, 2.856
+ARG A393, 2.953
+LYS E417, 4.925
+GLY E446, 0.0
+TYR E449, -10.57
+TYR E453, -2.924
+LEU E455, 4.563
+PHE E456, -4.579
+ALA E475, 0.0
+PHE E486, -12.83
+ASN E487, 2.757
+TYR E489, 0.843
+GLN E493, 10.61
+GLY E496, 0.0
+GLN E498, 8.258
+THR E500, -0.6821
+ASN E501, 4.609
+GLY E502, 0.0
+TYR E505, -1.336
+```
 
 Here you can observe the plot of the results obtained:
 
@@ -195,53 +215,18 @@ Here you can observe the plot of the results obtained:
 ## Step 4
 Pymol allowed us to obtain images of the interface highlighting the relevant residues, and also, the interactions.
 We chose the following colors so as to differentiate the different impacts values and the ones which had not.
-The residues in color red : those with highest impact. Values between 5 and + 10 in DG difference.
-The residues in color orange : those with the lowest impact. Values between 0.1- 4.9 in DG difference
-The residues in color gray : those without impact. We later noticed that they were mostly composed of GLY (glycines).
+   - The residues in color red : those with highest impact. Values between 5 and + 10 in DG difference.
+   - The residues in color orange : those with the lowest impact. Values between 0.1- 4.9 in DG difference
+   - The residues in color gray : those without impact. We later noticed that they were mostly composed of GLY (glycines).
 
-
-
-
-
-
-
-
-
-
-
-
-
+![Screenshot from 2023-11-22 11-40-49](https://github.com/sagggastegui/biophy/assets/144942444/5709bcac-1cb4-422b-8787-14af2493e8e1)
 
 ## Results and discussion
 **Problems**
 
 We encountered a problem once our programs were done; our results didn’t make sense. At first we reached out to Irene and realized it might have been an error in our distance measurements, however it came to be that we were using an erroneous pdb file of the protein. After looking back on the preparation step and what we did we realized we used a certain way to remove heteroatoms in Pymol which affected the result of the rest of the steps… 
 
-OBTAINED                                           VS                            EXPECTED 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+![Screenshot from 2023-11-22 11-47-57](https://github.com/sagggastegui/biophy/assets/144942444/9295ca31-a6ca-4c9c-b15e-9c6cf766cf64)
 
 **Conclusions**
 
