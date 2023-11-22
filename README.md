@@ -1,5 +1,4 @@
-# biophy
-PROTEIN-PROTEIN INTERFACE ANALYSIS
+# PROTEIN-PROTEIN INTERFACE ANALYSIS 
 Receptor Binding Domain (RBD) of SARS-Cov-2 Spike Protein and its receptor Angiotensin Converting Enzyme (ACE2)
 
 
